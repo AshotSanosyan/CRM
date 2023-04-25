@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Сделки</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Контакт</th>
+                <th>Этап</th>
+                <th>Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deal in deals %}
+                <tr>
+                    <td>{{ deal.contact.name }}</td>
+                    <td>{{ deal.stage }}</td>
+                    <td>{{ deal.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

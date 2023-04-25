@@ -1,0 +1,49 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Редактирование контакта</h2>
+
+    <form action="{{ url_for('edit_contact', contact_id=contact.id) }}" method="post">
+        <div class="form-group">
+            <label for="organization">Организация:</label>
+            <input type="text" name="organization" id="organization" value="{{ contact.organization }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" name="name" id="name" value="{{ contact.name }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="position">Должность:</label>
+            <input type="text" name="position" id="position" value="{{ contact.position }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ contact.email }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон:</label>
+            <input type="text" name="phone" id="phone" value="{{ contact.phone }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Статус:</label>
+            <select name="status" id="status" class="form-control" required>
+                <option value="перезвонить" {% if contact.status == 'перезвонить' %}selected{% endif %}>Перезвонить</option>
+                <option value="нет ответа" {% if contact.status == 'нет ответа' %}selected{% endif %}>Нет ответа</option>
+                <option value="нет интереса" {% if contact.status == 'нет интереса' %}selected{% endif %}>Нет интереса</option>
+                <option value="другой статус" {% if contact.status == 'другой статус' %}selected{% endif %}>Другой статус</option>
+            </select>
+        </div>
+          <div class="form-group">
+            <label for="source">Источник:</label>
+            <select name="source" id="source" class="form-control" required>
+                <option value="Сайт" {% if contact.source == 'Сайт' %}selected{% endif %}>Сайт</option>
+                <option value="Раздатка" {% if contact.source == 'Раздатка' %}selected{% endif %}>Раздатка</option>
+                <option value="Ивенты" {% if contact.source == 'Ивенты' %}selected{% endif %}>Ивенты</option>
+                <option value="Другой" {% if contact.source == 'Другой' %}selected{% endif %}>Другой</option>
+            </select>
+        </div>
+        <input type="submit" value="Сохранить изменения" class="btn btn-primary">
+    </form>
+{% endblock %}

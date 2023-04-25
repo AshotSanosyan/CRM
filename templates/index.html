@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Добро пожаловать в Simple-CRM</h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Добавить контакт</h3>
+            <form action="{{ url_for('add_contact') }}" method="post">
+                <div class="form-group">
+                    <input type="text" name="organization" placeholder="Организация" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Имя" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="position" placeholder="Должность" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="phone" placeholder="Телефон" class="form-control" required>
+                </div>
+                <!-- Новое поле "Источник" -->
+                <div class="form-group">
+                    <label for="source">Источник</label>
+                    <select name="source" id="source" class="form-control">
+                        <option value="Сайт">Сайт</option>
+                        <option value="Раздатка">Раздатка</option>
+                        <option value="Ивенты">Ивенты</option>
+                        <option value="Другой">Другой</option>
+
+
+                        <!-- добавьте дополнительные источники, если необходимо -->
+                    </select>
+                </div>
+                <!-- Конец нового поля "Источник" -->
+                <div class="form-group">
+                    <input type="submit" value="Добавить контакт" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h3>Simple-CRM</h3>
+            <p>Интуитивно понятная и простая в использовании CRM-система для управления отношениями с вашими клиентами. Легко управляйте контактами, задачами и продажами, анализируйте данные и отслеживайте свои действия. Повысьте продуктивность своего бизнеса. Попробуйте Simple-CRM уже сегодня.</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Заголовок и кнопка редактирования -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Организация: {{ contact.organization }}</h2>
+        <a href="{{ url_for('edit_contact', contact_id=contact.id) }}" class="btn btn-primary">Редактировать контакт</a>
+    </div>
+    
+   <p>Контакт: {{ contact.name }}</p>
+    <p>Email: {{ contact.email }}</p>
+    <p>Телефон: {{ contact.phone }}</p>
+    <p>Должность: {{ contact.position }}</p>
+    <p>Статус: {{ contact.status }}</p>
+    <p>Источник: {{ contact.source }}</p>
+    <!-- Навигация -->
+    <div>
+        <button id="showComments" class="btn btn-primary">Показать комментарии</button>
+        <button id="showChanges" class="btn btn-secondary">Показать историю изменений</button>
+    </div>
+
+    <!-- Блок с комментариями -->
+    <div id="commentsBlock" style="display: block;">
+        <h3>Комментарии</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Текст</th>
+                    <th>Дата создания</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in modified_comments %}
+                    <tr>
+                        <td>{{ comment.text }}</td>
+                        <td>{{ comment.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Форма добавления комментария -->
+        <form action="{{ url_for('add_comment', contact_id=contact.id) }}" method="post">
+            <div class="form-group">
+                <label for="commentText">Добавить комментарий:</label>
+                <textarea name="commentText" id="commentText" class="form-control" rows="3" required></textarea>
+            </div>
+            <input type="submit" value="Добавить" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Блок с историей изменений -->
+    <div id="changesBlock" style="display: none;">
+        <h3>История изменений</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Изменение</th>
+                    <th>Старое значение</th>
+                    <th>Новое значение</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for change in changes %}
+                    <tr>
+                        <td>{{ change.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ change.text }}</td>
+                        <td>{{ change.old_value }}</td>
+                        <td>{{ change.new_value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Скрипт для показа/скрытия блоков -->
+    <script>
+        $(document).ready(function() {
+            $("#showComments").click(function() {
+                $("#commentsBlock").show();
+                $("#changesBlock").hide();
+            });
+
+            $("#showChanges").click(function() {
+                $("#commentsBlock").hide();
+                $("#changesBlock").show();
+            });
+        });
+    </script>
+{% endblock %}
