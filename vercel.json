@@ -3,14 +3,14 @@
   "name": "my-flask-app",
   "builds": [
     {
-      "src": "main.py",
+      "src": "wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "50mb" }
     }
   ],
   "routes": [
     { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/(.*)", "dest": "/main.py" }
+    { "src": "/(.*)", "dest": "/wsgi.py" }
   ],
   "env": {
     "FLASK_ENV": "production"
