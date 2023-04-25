@@ -1,6 +1,6 @@
-Flask==2.1.1
-Flask-Login==0.5.0
-Flask-SQLAlchemy==2.5.1
-openpyxl==3.0.9
-pytz==2021.3
-Werkzeug==2.1.1
+Flask==2.3.0
+Flask-Login==0.6.2
+Flask-SQLAlchemy==3.0.3
+openpyxl==3.1.2
+pytz==2023.2
+Werkzeug==2.3.0
