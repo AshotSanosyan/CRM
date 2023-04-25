@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "my-flask-app",
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "main.py" }
+  ],
+  "env": {
+    "FLASK_ENV": "production"
+  }
+}
